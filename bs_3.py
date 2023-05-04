@@ -15,7 +15,17 @@ data = {
 }
 responce = session.post(link, data=data, headers=header)
 
-model = 'https://dbdesign.online/user-profile?page=profile'
+profile_info = 'https://dbdesign.online/user-profile?page=profile'
 
-model_responce = session.get(model, headers=header).text
-print(model_responce)
+profile_responce = session.get(profile_info, headers=header).text
+
+cookies_dict = [
+    {'domain': key.domain, 'name': key.name, 'path': key.path, 'value': key.value}
+    for key in session.cookies
+]
+session2 = requests.Session()
+for cookies in cookies_dict:
+    session2.cookies.set(**cookies)
+
+resp = session2.get(profile_info,headers=header)
+print(resp.text)
