@@ -15,8 +15,8 @@ for image in all_image:
     download_soup = BeautifulSoup(download_storage, 'lxml')
     download_block = download_soup.find('div', class_='image_data').find('div', class_='block_down')
     result_link = download_block.find('a').get('href')
+
     # download images
     image_bytes = requests.get(f'{link}{result_link}').content
-
     with open(f'image/{image_number}.jpg', 'wb') as file:
         file.write(image_bytes)
