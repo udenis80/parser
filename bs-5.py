@@ -1,10 +1,8 @@
-import requests
 import multiprocessing
-
-
+import requests
 
 def handler(proxy):
-    link = 'http://icanhazip.com/'
+    link = "http://icanhazip.com/"
 
     proxies = {
         'http': f'http://{proxy}',
@@ -14,7 +12,7 @@ def handler(proxy):
         responce = requests.get(link, proxies=proxies, timeout=2).text
         print(f'IP: {responce.strip()}')
     except:
-        print('Прокси не вадный')
+        print('Прокси не валидный')
 
 
 with open('proxy') as file:
